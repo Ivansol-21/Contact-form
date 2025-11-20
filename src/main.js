@@ -8,20 +8,23 @@ import { BtnSubmit } from './components/BtnSubmit.js';
 const $app = document.getElementById('app');
 if ($app) {
 	const nameField = FieldText('First name', 'name', 'text', '', true),
-		lastNameField = FieldText('Last name', 'last-name', 'text', 'Enter your last name', true),
-		emalField = FieldText('Email Adress', 'email', 'email', 'Enter your email', true),
-		message = TextArea('Message', 'message', 'Enter your message here', true),
+		lastNameField = FieldText('Last name', 'last-name', 'text', '', true),
+		emalField = FieldText('Email Adress', 'email', 'email', '', true),
+		message = TextArea('Message', 'message', '', true),
 		query = RadioOpcions('Query Type', 'query', ['General Enquiry', 'Support Resquest'], true),
 		agree = AgreeComponenst('I agree to the terms and conditions', 'terms', true),
 		submitButton = BtnSubmit('Submit');
 
-	const $fragment = document.createDocumentFragment(), 
+	const $fragment = document.createDocumentFragment(),
 		$form = document.createElement('form'),
 		$title = document.createElement('h1');
 
+	$app.className = 'min-h-screen bg-green-200 flex items-center justify-center p-4';
+
 	$title.textContent = 'Contact Us';
-	$title.className = 'text-3xl font-bold mb-6 text-gray-700';
+	$title.className = 'w-1/1 text-3xl font-bold mb-6 text-gray-700';
 	$form.appendChild($title);
+	$form.className = 'flex flex-wrap gap-x-4 gap-y-2 bg-white shadow-md rounded-xl px-8 pt-6 pb-8 max-w-2xl';
 
 	$form.appendChild(nameField);
 	$form.appendChild(lastNameField);
@@ -32,6 +35,6 @@ if ($app) {
 	$form.appendChild(submitButton);
 
 	$fragment.appendChild($form);
-	
+
 	$app.appendChild($fragment);
 }
