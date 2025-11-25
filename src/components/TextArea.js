@@ -12,7 +12,7 @@ export const TextArea = (label, name, placeholder, required) => {
     $textarea.name = name;
     $textarea.id = formatID(label);
     $textarea.placeholder = placeholder;
-    $textarea.className = 'mt-1 block w-full resize-none px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 cursor-pointer';
+    $textarea.className = 'mt-1 block w-full resize-none px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400 hover:border-teal-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 cursor-pointer';
     $textarea.rows = 4;
     $textarea.cols = 4;
     $wrapper.appendChild($label);

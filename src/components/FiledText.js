@@ -14,7 +14,7 @@ export const FieldText = (label, name, type, placeholder, required) => {
     $input.name = name;
     $input.id = formatID(label);
     $input.placeholder = placeholder;
-    $input.className = 'mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 cursor-pointer';
+    $input.className = 'mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400 hover:border-teal-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 cursor-pointer';
     // $input.setAttribute('autocomplete', 'off');
 
 
