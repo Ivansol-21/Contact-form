@@ -1,7 +1,7 @@
 export const validar = (inputOrName, required = false) => {
     // Si viene el target de blur/change
     let inputs = [];
-
+    
     if (typeof inputOrName === "string") {
         // Es un nombre: caso radios o checkbox
         inputs = [...document.querySelectorAll(`[name="${inputOrName}"]`)];
@@ -9,7 +9,7 @@ export const validar = (inputOrName, required = false) => {
         // Es un input individual
         inputs = [inputOrName];
     }
-
+    
     const field = inputs[0];
     const type = field.type;
     const name = field.name;
@@ -22,7 +22,6 @@ export const validar = (inputOrName, required = false) => {
     // -----------------------------
     // TEXT / EMAIL / TEXTAREA
     // -----------------------------
-    console.log(field);
     if (type === "text" || type === "textarea" || type === "email") {
         const value = field.value.trim();
 

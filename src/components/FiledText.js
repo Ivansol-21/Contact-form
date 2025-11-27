@@ -30,8 +30,6 @@ export const FieldText = (label, name, type, placeholder, required) => {
     
     if (type === 'email') $wrapper.className = 'mb-4 w-full';
 
-    // if (required) $input.setAttribute('required', '');
-
 
     $input.addEventListener('blur', ev => validar(ev.target, required));
 

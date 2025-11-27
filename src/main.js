@@ -25,7 +25,7 @@ if ($app) {
 	$title.textContent = 'Contact Us';
 	$title.className = 'w-1/1 text-3xl font-bold mb-6 text-gray-700';
 	$form.appendChild($title);
-	$form.className = 'flex flex-wrap gap-x-4 gap-y-2 bg-white shadow-md rounded-xl px-8 pt-6 pb-8 max-w-2xl';
+	$form.className = 'flex flex-wrap gap-x-4 gap-y-2 bg-white shadow-md rounded-xl px-8 pt-6 pb-8 max-w-3xl';
 
 	$form.appendChild(nameField);
 	$form.appendChild(lastNameField);
@@ -41,7 +41,6 @@ if ($app) {
 
 	$form.addEventListener('submit', ev => {
 		ev.preventDefault();
-		const formData = new FormData($form);
-		enviar(formData);
+		enviar($form);
 	});
 }

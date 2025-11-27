@@ -1,6 +1,7 @@
 import { validar } from "./validar.js";
+import { SuccesState } from "../components/SuccesState.js";
 
-export const enviar = (formData) => {
+export const enviar = (form) => {
 
     const fields = [
         { name: "firstName", required: true },
@@ -25,5 +26,21 @@ export const enviar = (formData) => {
 
     if (!allValid) return;
 
-    console.log("FORM OK, ENVIAR!");
+    const $app = document.querySelector("#app");
+
+    $app.appendChild(SuccesState());
+
+    form.reset();
+    
+    const $radios = document.querySelectorAll(`[type="radio"]`);
+    $radios.forEach(radio => {
+        radio.parentElement.classList.remove('bg-teal-50', 'border-teal-500');
+    });
+    
+    setTimeout(() => {
+        const $successMessage = document.querySelector("#success-state");
+        if ($successMessage) {
+            $app.removeChild($successMessage);
+        }
+    }, 3000);
 };
