@@ -1,22 +1,78 @@
-export const validar = (ev, $wrapper, required) => {
-    const value = ev.target.value.trim() || ev.target.type === 'checkbox' ? ev.target.checked ? 'checked' : '' : '';
-    let $error = $wrapper.querySelector('.field-error');
-    if (required && value === '' || ev.target.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        if (!$error) {
-            $error = document.createElement('span');
-            $error.className = 'field-error text-red-500 text-sm mt-1 block';
-            $wrapper.appendChild($error);
-            if (ev.target.type === 'email') {
-                $error.textContent = 'Please enter a valid email address';
-            } else if (ev.target.type === 'checkbox') {
-                $error.textContent = 'To submit this form, please consent to being contacted';
-            } else {
-                $error.textContent = 'This field is required';
+export const validar = (inputOrName, required = false) => {
+    // Si viene el target de blur/change
+    let inputs = [];
+
+    if (typeof inputOrName === "string") {
+        // Es un nombre: caso radios o checkbox
+        inputs = [...document.querySelectorAll(`[name="${inputOrName}"]`)];
+    } else {
+        // Es un input individual
+        inputs = [inputOrName];
+    }
+
+    const field = inputs[0];
+    const type = field.type;
+    const name = field.name;
+    const wrapper = field.closest("div");
+    const errorEl = wrapper.querySelector(".field-error");
+    
+    let isValid = true;
+    let message = "";
+    
+    // -----------------------------
+    // TEXT / EMAIL / TEXTAREA
+    // -----------------------------
+    console.log(field);
+    if (type === "text" || type === "textarea" || type === "email") {
+        const value = field.value.trim();
+
+        if (required && value === "") {
+            isValid = false;
+            message = "This field is required";
+        }
+
+        if (isValid && type === "email" && value !== "") {
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                isValid = false;
+                message = "Please enter a valid email address";
             }
         }
+    }
+
+    // -----------------------------
+    // CHECKBOX
+    // -----------------------------
+    if (type === "checkbox") {
+        if (required && !field.checked) {
+            isValid = false;
+            message = "To submit this form, please consent to being contacted";
+        }
+    }
+
+    // -----------------------------
+    // RADIOS
+    // -----------------------------
+    if (type === "radio") {
+        const checked = inputs.some(r => r.checked);
+        if (required && !checked) {
+            isValid = false;
+            message = "Please select an option";
+        }
+    }
+
+    // -----------------------------
+    // MOSTRAR / OCULTAR ERROR
+    // -----------------------------
+
+    if (!isValid) {
+        field.classList.add("border-red-500/60");
+        errorEl.textContent = message;
+        errorEl.className = "field-error w-full text-red-500/60 text-sm mt-1 block";
         return false;
     } else {
-        if ($error) $error.remove();
+        field.classList.remove("border-red-500/60");
+        errorEl.textContent = "";
+        errorEl.className = "field-error hidden";
         return true;
     }
-}
+};

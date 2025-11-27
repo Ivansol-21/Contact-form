@@ -5,3 +5,8 @@
     --color-green-600: hsl(169, 82%, 27%);
     --breakpoint-movile: 320px;
 }
+@layer base {
+    body {
+        font-family: 'karla', sans-serif;
+    }
+}

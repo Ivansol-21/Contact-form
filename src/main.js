@@ -4,15 +4,16 @@ import { TextArea } from './components/TextArea.js';
 import { RadioOpcions } from './components/RadioOpcions.js';
 import { AgreeComponenst } from './components/AgreeComponenst.js';
 import { BtnSubmit } from './components/BtnSubmit.js';
+import { enviar } from './utils/enviar.js';
 
 const $app = document.getElementById('app');
 if ($app) {
-	const nameField = FieldText('First name', 'name', 'text', '', true),
-		lastNameField = FieldText('Last name', 'last-name', 'text', '', true),
+	const nameField = FieldText('First name', 'firstName', 'text', '', true),
+		lastNameField = FieldText('Last name', 'lastName', 'text', '', true),
 		emalField = FieldText('Email Adress', 'email', 'email', '', true),
 		message = TextArea('Message', 'message', '', true),
 		query = RadioOpcions('Query Type', 'query', ['General Enquiry', 'Support Resquest'], true),
-		agree = AgreeComponenst('I agree to the terms and conditions', 'terms', true),
+		agree = AgreeComponenst('I agree to the terms and conditions', 'agree', true),
 		submitButton = BtnSubmit('Submit');
 
 	const $fragment = document.createDocumentFragment(),
@@ -37,4 +38,10 @@ if ($app) {
 	$fragment.appendChild($form);
 
 	$app.appendChild($fragment);
+
+	$form.addEventListener('submit', ev => {
+		ev.preventDefault();
+		const formData = new FormData($form);
+		enviar(formData);
+	});
 }
